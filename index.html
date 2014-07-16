@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=1024" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="description" content="This is an ECMA Script 6 presentation for BeerJS Tahoe." />
+	<meta name="author" content="Garrett McCullough" />
+
+	<title>ECMA Script 6</title>
+
+	<!--<link href="lib/impress/css/impress.css" rel="stylesheet" />-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+	<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/presentation.css" rel="stylesheet">
+</head>
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+	<p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+	<p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+	<div id="cover" class="step slide" data-x="0" data-y="0">
+		<h1>
+			ECMA Script 6<br />
+			<small>Harmony</small><br />
+			<small>ES.next</small>
+		</h1>
+	</div>
+
+	<div id="history" class="step slide" data-x="1000" data-y="0">
+		<h2>History</h2>
+		<ul>
+			<li>ES5 was standardized in 2009</li>
+			<li>Targeting ratification in December 2014</li>
+			<li>
+				<a target="_blank" href="http://kangax.github.io/compat-table/es6/">Newer browsers already support some of the features.</a>
+			</li>
+			<ul>
+				<li>Firefox appears to have the best support</li>
+				<li>For Chrome, turn on the ‘Enable Experimental JavaScript’ option via chrome://flags</li>
+			</ul>
+		</ul>
+	</div>
+
+	<div id="tools" class="step slide" data-x="2000" data-y="0">
+		<h2>Tools</h2>
+		<ul>
+			<li><a target="_blank" href="https://github.com/google/traceur-compiler">Traceur</a></li>
+			<ul>
+				<li>Transpiles code from ES6 to ES5.</li>
+				<li>Code may be pre-complied using Node, or compiled on the fly by including a lib.</li>
+				<li>They even have an online simulator! <small class="text-muted">But it only works so-so.</small></li>
+			</ul>
+			<li><a target="_blank" href="https://github.com/paulmillr/es6-shim">Paul Miller's ES6 Shims</a></li>
+		</ul>
+	</div>
+
+	<div id="features" class="step slide" data-x="3000" data-y="0">
+		<h2>New Features</h2>
+		<ul>
+			<li><a href="#arrows">Arrows =></a></li>
+			<li>Classes</li>
+			<li>Enhanced Object Literals</li>
+			<li>Template Strings</li>
+			<li>Destructuring</li>
+			<li>Default + Rest + Spread</li>
+			<li><a href="#let-const">Let + Const</a></li>
+			<li>Iterators + for..of</li>
+			<li>Generators</li>
+		</ul>
+	</div>
+
+	<div id="features-cont" class="step slide" data-x="4000" data-y="0">
+		<h2>New Features <small>(cont.)</small></h2>
+		<ul>
+			<li>Comprehensions</li>
+			<li>Unicode</li>
+			<li>Modules</li>
+			<li>Module Loaders</li>
+			<li>Map + Set + Weakmap + Weakset</li>
+			<li>Proxies</li>
+			<li>Symbols</li>
+			<li>Subclassable Built-ins</li>
+			<li><a href="#promise">Promises</a></li>
+		</ul>
+	</div>
+
+	<div id="features-cont2" class="step slide" data-x="5000" data-y="0">
+		<h2>New Features <small>(cont.)</small></h2>
+		<ul>
+			<li>Math + Number + String + Object APIs</li>
+			<li>Binary &amp; Octal Literals</li>
+			<li>Reflect API</li>
+			<li>Tail Calls</li>
+		</ul>
+	</div>
+
+	<div id="arrows" class="step slide" data-x="3100" data-y="850" data-z="0" data-rotate="90" data-scale="1">
+		<h3>Arrows =></h3>
+		<ul>
+			<li>Shorthand for writing a function.</li>
+			<li>Similar to C#, Java 8 and CoffeeScript.</li>
+			<li>Supports both expression and statement bodies.</li>
+			<li>Shares the same <code>this</code> as the surrounding code.</li>
+		</ul>
+			<pre>
+var simple = a => a > 15 ? 15 : a;
+simple(16); // 15
+simple(10); // 10
+
+var complex = (a, b) => {
+  if (a > b) {
+    return a;
+  } else {
+    return b;
+  }
+}
+</pre>
+	</div>
+
+	<div id="let-const" class="step slide" data-x="3100" data-y="1850" data-z="0" data-rotate="90" data-scale="1">
+		<h3>Let + Const</h3>
+		<ul>
+			<li>Block scoped variables.</li>
+			<li><code>let</code> is the new <code>var</code></li>
+			<li><code>const</code> creates variables that can't be re-assigned.</li>
+		</ul>
+			<pre>
+function f() {
+  {
+    let x;
+    {
+      // okay, block scoped name
+      const x = "sneaky";
+      // error, const
+      x = "foo";
+    }
+    // error, already declared in block
+    let x = "inner";
+  }
+}
+</pre>
+	</div>
+
+	<div id="promise" class="step slide" data-x="5100" data-y="850" data-z="0" data-rotate="90" data-scale="1">
+		<h3>Promises</h3>
+		<ul>
+			<li>Allows for asynchronous calls.</li>
+			<li>Data is unknown so we have the promise of data.</li>
+		</ul>
+		<pre>
+p = new Promise( function() {} )
+p.resolve( value )                      // resolve a promise with success
+p.reject( reason )                      // resolve a promise with an error
+Promise.all( [array] )                  // satisfied when all promises return
+Promise.race( [array] )                 // satisfied when any promise returns
+p.then( onFulfilled, onRejected )       // success/failure handler. May be chained
+p.catch( onRejected )                   // global error handler. May be chained
+</pre>
+	</div>
+
+	<div id="sources" class="step slide" data-x="6000" data-y="0">
+		<h2>Research</h2>
+		<ul>
+			<li><a target="_blank" href="https://github.com/lukehoban/es6features">Overview of ES6 Features</a> </li>
+			<li><a target="_blank" href="http://www.ecmascript.org/">ECMA Script Standards</a></li>
+			<li><a target="_blank" href="http://addyosmani.com/blog/ecmascript-6-resources-for-the-curious-javascripter/">ECMAScript 6 Resources For The Curious JavaScripter</a> </li>
+			<li><a target="_blank" href="http://espadrine.github.io/New-In-A-Spec/es6/">ES6 in a page</a></li>
+			<li><a target="_blank" href="http://code.tutsplus.com/articles/use-ecmascript-6-today--net-31582">Tuts+ Tutorial</a> </li>
+		</ul>
+	</div>
+
+</div>
+<div class="hint">
+	<p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+	if ("ontouchstart" in document.documentElement) {
+		document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+	}
+</script>
+
+<script src="lib/impress/js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>
