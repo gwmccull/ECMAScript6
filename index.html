@@ -64,11 +64,11 @@
 		<h2>New Features</h2>
 		<ul>
 			<li><a href="#arrows">Arrows =></a></li>
-			<li>Classes</li>
+			<li><a href="#classes">Classes</a></li>
 			<li>Enhanced Object Literals</li>
 			<li>Template Strings</li>
 			<li>Destructuring</li>
-			<li>Default + Rest + Spread</li>
+			<li><a href="#default">Default</a> + <a href="#rest">Rest</a> + <a href="#spread">Spread</a></li>
 			<li><a href="#let-const">Let + Const</a></li>
 			<li>Iterators + for..of</li>
 			<li>Generators</li>
@@ -80,7 +80,7 @@
 		<ul>
 			<li>Comprehensions</li>
 			<li>Unicode</li>
-			<li>Modules</li>
+			<li><a href="#modules">Modules</a></li>
 			<li>Module Loaders</li>
 			<li>Map + Set + Weakmap + Weakset</li>
 			<li>Proxies</li>
@@ -123,7 +123,86 @@ var complex = (a, b) => {
 </pre>
 	</div>
 
-	<div id="let-const" class="step slide" data-x="3100" data-y="1850" data-z="0" data-rotate="90" data-scale="1">
+	<div id="classes" class="step slide new" data-x="3100" data-y="1850" data-z="0" data-rotate="90" data-scale="1">
+		<h3>Classes</h3>
+		<ul>
+			<li>Cleaner but functionally similar to prototypal inheritance</li>
+			<li>Classes can inherit, extend, overload, etc.</li>
+		</ul>
+<pre>
+class Language {
+  constructor(name, founder, year) {
+    this.name = name;
+    this.founder = founder;
+    this.year = year;
+  }
+  summary() {
+    return this.name + " was created by " + this.founder + " in " + this.year;
+  }
+}
+class MetaLanguage extends Language {
+  constructor(x, y, z, version) {
+    super(x, y, z);
+    this.version = version;
+  }
+}
+</pre>
+	</div>
+
+	<div id="default" class="step slide new" data-x="3100" data-y="2850" data-z="0" data-rotate="90" data-scale="1">
+		<h3>Default Func Params</h3>
+		<ul>
+			<li>Give function parameters a default value so they can be optional</li>
+			<li>Optional parameters must be at the "end" of the list.</li>
+		</ul>
+<pre>
+function history(lang = "C", year = 1972) {
+  return lang + " was created around the year " + year;
+}
+</pre>
+	</div>
+
+	<div id="rest" class="step slide new" data-x="3100" data-y="3850" data-z="0" data-rotate="90" data-scale="1">
+		<h3>Rest</h3>
+		<ul>
+			<li>Allows you to specify a function with an unknown &amp; variable number of arguments.</li>
+			<li>Functionally similar to using the <code>arguments</code> variable in a function.</li>
+		</ul>
+<pre>
+function push(array, ...items) { // defining rest parameters with 3 dot syntax
+  items.forEach(function(item) {
+    array.push(item);
+    console.log( item );
+  });
+}
+// 1 fixed + 4 variable parameters
+var planets = [];
+console.log("Inner planets of our Solar system are: " );
+push(planets, "Mercury", "Venus", "Earth", "Mars"); // rest parameters
+</pre>
+	</div>
+
+	<div id="spread" class="step slide new" data-x="3100" data-y="4850" data-z="0" data-rotate="90" data-scale="1">
+		<h3>Spread</h3>
+		<ul>
+			<li>The "opposite" of Rest</li>
+			<li>One variable is passed when the function is called and JS splits it automatically.</li>
+		</ul>
+<pre>
+// Spread operator "...weblink"
+function createURL (comment, path, protocol, subdomain, domain, tld) {
+  var shoutout = comment + ": " + protocol + "://" + subdomain + "." + domain + "." + tld + "/" + path;
+  console.log( shoutout );
+}
+
+var weblink = ["hypertext/WWW/TheProject.html", "http", "info", "cern", "ch"],
+  comment = "World's first Website";
+
+createURL(comment, ...weblink ); // spread operator
+</pre>
+	</div>
+
+	<div id="let-const" class="step slide" data-x="3100" data-y="5850" data-z="0" data-rotate="90" data-scale="1">
 		<h3>Let + Const</h3>
 		<ul>
 			<li>Block scoped variables.</li>
@@ -147,7 +226,27 @@ function f() {
 </pre>
 	</div>
 
-	<div id="promise" class="step slide" data-x="5100" data-y="850" data-z="0" data-rotate="90" data-scale="1">
+	<div id="modules" class="step slide new" data-x="4100" data-y="850" data-z="0" data-rotate="90" data-scale="1">
+		<h3>Modules</h3>
+		<ul>
+			<li>Allows you to create modules that expose certain functions.</li>
+			<li>Allows you to import portions of a module.</li>
+			<li>Takes place of AMD and CommonJS.</li>
+		</ul>
+<pre>
+module math {
+  export function sum(x, y) {
+    return x + y;
+  }
+  export var pi = 3.141593;
+}
+
+import {sum, pi} from math;
+console.log(sum(pi,pi));
+</pre>
+	</div>
+
+	<div id="promise" class="step slide" data-x="4100" data-y="1850" data-z="0" data-rotate="90" data-scale="1">
 		<h3>Promises</h3>
 		<ul>
 			<li>Allows for asynchronous calls.</li>
